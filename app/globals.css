@@ -46,12 +46,12 @@
   }
 
   .btn-primary {
-    @apply px-7 py-3 bg-emerald-mid text-forest-900 rounded-md text-sm font-medium
-           hover:bg-emerald-DEFAULT transition-colors duration-200;
-  }
+  @apply px-7 py-3 bg-emerald-mid text-forest-900 rounded-md text-sm font-medium
+         hover:brightness-110 transition-all duration-200;
+}
 
-  .btn-ghost {
-    @apply px-7 py-3 border border-emerald-mid/35 text-emerald-DEFAULT rounded-md text-sm
-           hover:bg-emerald-mid/10 transition-colors duration-200;
-  }
+.btn-ghost {
+  @apply px-7 py-3 border border-emerald-mid/35 text-emerald-mid rounded-md text-sm
+         hover:bg-emerald-mid/10 transition-colors duration-200;
+}
 }
