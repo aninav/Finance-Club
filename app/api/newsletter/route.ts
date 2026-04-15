@@ -7,31 +7,41 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid email' }, { status: 400 })
   }
 
-  // ── Option A: Resend (recommended — free tier is generous) ──────────────
-  // Install: npm i resend
-  // Docs: https://resend.com/docs
-  //
-  // const { Resend } = await import('resend')
-  // const resend = new Resend(process.env.RESEND_API_KEY)
-  // await resend.contacts.create({
-  //   email,
-  //   audienceId: process.env.RESEND_AUDIENCE_ID!,
-  // })
+  const RESEND_KEY = process.env.RESEND_API_KEY
+  const AUDIENCE_ID = process.env.RESEND_AUDIENCE_ID
 
-  // ── Option B: Mailchimp ─────────────────────────────────────────────────
-  // const res = await fetch(
-  //   `https://us1.api.mailchimp.com/3.0/lists/${process.env.MAILCHIMP_LIST_ID}/members`,
-  //   {
-  //     method: 'POST',
-  //     headers: {
-  //       Authorization: `apikey ${process.env.MAILCHIMP_API_KEY}`,
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({ email_address: email, status: 'subscribed' }),
-  //   }
-  // )
+  if (!RESEND_KEY || !AUDIENCE_ID) {
+    // No keys set — log and return success silently (dev mode)
+    console.log('Newsletter signup (Resend not configured):', email)
+    return NextResponse.json({ success: true })
+  }
 
-  // For now, just log and return success
-  console.log('Newsletter signup:', email)
-  return NextResponse.json({ success: true })
+  try {
+    const res = await fetch('https://api.resend.com/audiences/' + AUDIENCE_ID + '/contacts', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${RESEND_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        unsubscribed: false,
+      }),
+    })
+
+    if (!res.ok) {
+      const err = await res.json()
+      // 422 means contact already exists — treat as success
+      if (res.status === 422) {
+        return NextResponse.json({ success: true })
+      }
+      console.error('Resend error:', err)
+      return NextResponse.json({ error: 'Failed to subscribe' }, { status: 500 })
+    }
+
+    return NextResponse.json({ success: true })
+  } catch (err) {
+    console.error('Newsletter route error:', err)
+    return NextResponse.json({ error: 'Server error' }, { status: 500 })
+  }
 }

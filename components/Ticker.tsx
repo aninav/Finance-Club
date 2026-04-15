@@ -1,7 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
 
-// Symbols to display
 const SYMBOLS = ['SPY', 'QQQ', 'AAPL', 'NVDA', 'TSLA', 'BTC/USD', 'MSFT', 'AMZN']
 
 type Quote = {
@@ -11,7 +10,6 @@ type Quote = {
   percent_change: string
 }
 
-// Fallback static data shown before API response
 const FALLBACK: Quote[] = [
   { symbol: 'SPY',     price: '592.14', change: '+4.84',  percent_change: '+0.82%' },
   { symbol: 'QQQ',     price: '498.37', change: '+5.63',  percent_change: '+1.14%' },
@@ -23,34 +21,66 @@ const FALLBACK: Quote[] = [
   { symbol: 'AMZN',    price: '196.44', change: '-1.20',  percent_change: '-0.61%' },
 ]
 
+async function fetchQuotes(): Promise<Quote[] | null> {
+  const key = process.env.NEXT_PUBLIC_TWELVE_DATA_KEY
+  if (!key) return null
+
+  try {
+    // Use /quote which returns close, change, percent_change
+    // Fetch each symbol individually to avoid batch parse issues on free plan
+    const results = await Promise.all(
+      SYMBOLS.map(async (symbol) => {
+        const res = await fetch(
+          `https://api.twelvedata.com/quote?symbol=${encodeURIComponent(symbol)}&apikey=${key}`,
+          { cache: 'no-store' }
+        )
+        const data = await res.json()
+
+        // If API returns an error object (e.g. rate limit), fall back
+        if (data.status === 'error' || !data.close) return null
+
+        const price = parseFloat(data.close)
+        const change = parseFloat(data.change)
+        const pct = parseFloat(data.percent_change)
+
+        if (isNaN(price) || price === 0) return null
+
+        return {
+          symbol,
+          price: price.toFixed(2),
+          change: (change >= 0 ? '+' : '') + change.toFixed(2),
+          percent_change: (pct >= 0 ? '+' : '') + pct.toFixed(2) + '%',
+        } as Quote
+      })
+    )
+
+    // If more than half failed, return null to keep fallback
+    const valid = results.filter(Boolean) as Quote[]
+    if (valid.length < SYMBOLS.length / 2) return null
+
+    // Fill any nulls with fallback values
+    return SYMBOLS.map((sym, i) => results[i] ?? FALLBACK[i])
+  } catch {
+    return null
+  }
+}
+
 export default function Ticker() {
   const [quotes, setQuotes] = useState<Quote[]>(FALLBACK)
 
   useEffect(() => {
-    async function fetchQuotes() {
-      try {
-        const key = process.env.NEXT_PUBLIC_TWELVE_DATA_KEY
-        if (!key) return
-        const res = await fetch(
-          `https://api.twelvedata.com/quote?symbol=${SYMBOLS.join(',')}&apikey=${key}`
-        )
-        const data = await res.json()
-        const parsed: Quote[] = SYMBOLS.map((s) => {
-          const q = data[s] ?? data
-          return {
-            symbol: s,
-            price: parseFloat(q.close ?? q.price ?? '0').toFixed(2),
-            change: q.change ?? '0',
-            percent_change: q.percent_change ?? '0%',
-          }
-        })
-        setQuotes(parsed)
-      } catch {
-        // keep fallback
-      }
-    }
-    fetchQuotes()
-    const id = setInterval(fetchQuotes, 60_000)
+    // Fetch immediately on mount
+    fetchQuotes().then((data) => {
+      if (data) setQuotes(data)
+    })
+
+    // Then refresh every 60s
+    const id = setInterval(() => {
+      fetchQuotes().then((data) => {
+        if (data) setQuotes(data)
+      })
+    }, 60_000)
+
     return () => clearInterval(id)
   }, [])
 

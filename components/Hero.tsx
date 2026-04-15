@@ -17,7 +17,7 @@ export default function Hero() {
         <motion.div {...fade(0.05)} className="flex items-center gap-2 mb-6">
           <span className="w-2 h-2 rounded-full bg-emerald-DEFAULT animate-pulse" />
           <span className="text-[11px] tracking-[0.12em] uppercase text-emerald-DEFAULT font-medium">
-            Colleyville Heritage High School
+            Coppell High School
           </span>
         </motion.div>
 

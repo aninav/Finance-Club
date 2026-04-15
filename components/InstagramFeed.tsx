@@ -1,7 +1,18 @@
+'use client'
 import { Instagram } from 'lucide-react'
+import Script from 'next/script'
 
-// Note: Replace these with real Instagram embed URLs or use an Instagram Basic Display API
-// integration once you have access. For now, this links out to the profile.
+// ─────────────────────────────────────────────────────────────
+// SETUP (one-time, 2 minutes):
+// 1. Go to https://behold.so and sign up (free)
+// 2. Connect @chs_finance_club_ Instagram account
+// 3. Create a feed → copy the Feed ID
+// 4. Paste it into BEHOLD_FEED_ID below
+// ─────────────────────────────────────────────────────────────
+const BEHOLD_FEED_ID = 'YOUR_FEED_ID_HERE'
+
+const IS_CONFIGURED = BEHOLD_FEED_ID !== 'YOUR_FEED_ID_HERE'
+
 export default function InstagramFeed() {
   return (
     <section id="instagram" className="px-8 lg:px-16 py-20 border-b border-emerald-mid/8">
@@ -19,27 +30,31 @@ export default function InstagramFeed() {
         </a>
       </p>
 
-      {/* 
-        To show a real feed, integrate Behold.so (free tier) or EmbedSocial.
-        Add your widget script here. Example using Behold:
-        <div id="behold-widget" data-feed-id="YOUR_FEED_ID" />
-        <script src="https://w.behold.so/widget.js" type="module" />
-        
-        For now we render a 4-tile placeholder grid that links to the profile.
-      */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
-        {Array.from({ length: 4 }).map((_, i) => (
-          <a
-            key={i}
-            href="https://www.instagram.com/chs_finance_club_"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="aspect-square card flex items-center justify-center text-emerald-light/15 hover:border-emerald-mid/25 hover:text-emerald-light/30 transition-all"
-          >
-            <Instagram size={28} />
-          </a>
-        ))}
-      </div>
+      {IS_CONFIGURED ? (
+        <>
+          {/* Live Behold feed */}
+          <div className="mb-8">
+            {/* @ts-ignore — behold-widget is a custom element */}
+            <behold-widget feed-id={BEHOLD_FEED_ID} />
+          </div>
+          <Script src="https://w.behold.so/widget.js" strategy="lazyOnload" />
+        </>
+      ) : (
+        /* Placeholder grid shown until Behold is configured */
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <a
+              key={i}
+              href="https://www.instagram.com/chs_finance_club_"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="aspect-square card flex items-center justify-center text-emerald-light/15 hover:border-emerald-mid/25 hover:text-emerald-light/30 transition-all"
+            >
+              <Instagram size={28} />
+            </a>
+          ))}
+        </div>
+      )}
 
       <a
         href="https://www.instagram.com/chs_finance_club_"

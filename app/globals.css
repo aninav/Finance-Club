@@ -17,11 +17,6 @@
     font-family: 'DM Sans', system-ui, sans-serif;
   }
 
-  /* Light mode overrides */
-  html.light body {
-    @apply bg-slate-50 text-forest-900;
-  }
-
   ::selection {
     @apply bg-emerald-dark/30 text-emerald-light;
   }
@@ -46,12 +41,120 @@
   }
 
   .btn-primary {
-  @apply px-7 py-3 bg-emerald-mid text-forest-900 rounded-md text-sm font-medium
-         hover:brightness-110 transition-all duration-200;
+    @apply px-7 py-3 bg-emerald-mid text-forest-900 rounded-md text-sm font-medium
+           hover:brightness-110 transition-all duration-200;
+  }
+
+  .btn-ghost {
+    @apply px-7 py-3 border border-emerald-mid/35 text-emerald-mid rounded-md text-sm
+           hover:bg-emerald-mid/10 transition-colors duration-200;
+  }
 }
 
-.btn-ghost {
-  @apply px-7 py-3 border border-emerald-mid/35 text-emerald-mid rounded-md text-sm
-         hover:bg-emerald-mid/10 transition-colors duration-200;
+/* ── Light mode overrides ─────────────────────────────────────── */
+html.light body,
+.light body {
+  background-color: #e8f0e9;
+  color: #0a1a0f;
 }
+
+/* Page background */
+html.light,
+.light {
+  background-color: #e8f0e9;
+}
+
+/* All generic text that would otherwise be white or near-white */
+.light .text-emerald-light,
+.light .text-emerald-light\/55,
+.light .text-emerald-light\/45,
+.light .text-emerald-light\/35,
+.light .text-emerald-light\/30,
+.light .text-emerald-light\/25,
+.light .text-emerald-light\/15,
+.light .text-emerald-light\/90 {
+  color: #1a3d1f !important;
+}
+
+/* Section headings (white in dark → dark in light) */
+.light .section-heading,
+.light h1,
+.light h2,
+.light h3 {
+  color: #0a1a0f !important;
+}
+
+/* Section label (stays emerald, just darkened) */
+.light .section-label {
+  color: #2e7d32 !important;
+}
+
+/* Section sub text */
+.light .section-sub {
+  color: #2d4a30 !important;
+}
+
+/* Nav */
+.light nav {
+  background-color: #d6e8d7 !important;
+  border-color: #a5c8a8 !important;
+}
+.light nav a,
+.light nav span {
+  color: #0a1a0f !important;
+}
+.light nav a:hover {
+  color: #2e7d32 !important;
+}
+
+/* Ticker bar — keep dark green, just tweak text */
+.light .bg-forest-800 {
+  background-color: #1b3a1f !important;
+}
+
+/* Cards */
+.light .card {
+  background-color: #ffffff !important;
+  border-color: #a5c8a8 !important;
+}
+
+/* Inputs */
+.light input[type='email'] {
+  background-color: #ffffff !important;
+  border-color: #a5c8a8 !important;
+  color: #0a1a0f !important;
+}
+.light input[type='email']::placeholder {
+  color: #6b8f6e !important;
+}
+
+/* Borders */
+.light .border-emerald-mid\/8,
+.light .border-emerald-mid\/10,
+.light .border-emerald-mid\/12,
+.light [class*='border-emerald-mid'] {
+  border-color: #a5c8a8 !important;
+}
+
+/* Buttons */
+.light .btn-ghost {
+  border-color: #2e7d32 !important;
+  color: #2e7d32 !important;
+}
+.light .btn-ghost:hover {
+  background-color: #c8e6c9 !important;
+}
+
+/* Footer */
+.light footer {
+  background-color: #d0e8d2 !important;
+  color: #1a3d1f !important;
+}
+.light footer a {
+  color: #2e7d32 !important;
+}
+
+/* Scrolled navbar */
+.light .bg-forest-900\/95 {
+  background-color: rgba(214, 232, 215, 0.97) !important;
 }

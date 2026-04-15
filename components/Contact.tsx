@@ -2,17 +2,37 @@
 import { useState } from 'react'
 import { Mail, Instagram, Send } from 'lucide-react'
 
+// ── Update these to your real contact details ──
+const CONTACT_EMAIL = 'chsfinanceclub@gmail.com'   // ← change to your new email
+const INSTAGRAM_HANDLE = '@chs_finance_club_'
+const INSTAGRAM_URL = 'https://www.instagram.com/chs_finance_club_'
+
 export default function Contact() {
   const [email, setEmail] = useState('')
-  const [status, setStatus] = useState<'idle' | 'sent' | 'error'>('idle')
+  const [status, setStatus] = useState<'idle' | 'loading' | 'sent' | 'error'>('idle')
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (!email) return
-    // Replace with your newsletter service endpoint (e.g. Mailchimp, Resend, ConvertKit)
-    // For now, we just simulate success
-    setStatus('sent')
-    setEmail('')
+    if (!email || status === 'loading') return
+
+    setStatus('loading')
+
+    try {
+      const res = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      })
+
+      if (res.ok) {
+        setStatus('sent')
+        setEmail('')
+      } else {
+        setStatus('error')
+      }
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (
@@ -30,18 +50,18 @@ export default function Contact() {
 
           <div className="space-y-4">
             <a
-              href="mailto:chsfinanceclub@gmail.com"
+              href={`mailto:${CONTACT_EMAIL}`}
               className="flex items-center gap-3 text-[13px] text-emerald-DEFAULT hover:text-emerald-light transition-colors"
             >
-              <Mail size={15} /> chsfinanceclub@gmail.com
+              <Mail size={15} /> {CONTACT_EMAIL}
             </a>
             <a
-              href="https://www.instagram.com/chs_finance_club_"
+              href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 text-[13px] text-emerald-DEFAULT hover:text-emerald-light transition-colors"
             >
-              <Instagram size={15} /> @chs_finance_club_
+              <Instagram size={15} /> {INSTAGRAM_HANDLE}
             </a>
           </div>
         </div>
@@ -53,7 +73,7 @@ export default function Contact() {
           </p>
           {status === 'sent' ? (
             <p className="text-[14px] text-emerald-DEFAULT">
-              ✓ You're on the list — see you at the next meeting!
+              ✓ You're on the list — we'll be in touch!
             </p>
           ) : (
             <form onSubmit={handleSubmit} className="flex gap-3">
@@ -63,10 +83,16 @@ export default function Contact() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="your@email.com"
                 required
-                className="flex-1 px-4 py-3 bg-white/[0.04] border border-emerald-mid/20 rounded-md text-[13px] text-emerald-light placeholder-emerald-light/25 focus:outline-none focus:border-emerald-mid/50 transition-colors"
+                disabled={status === 'loading'}
+                className="flex-1 px-4 py-3 bg-white/[0.04] border border-emerald-mid/20 rounded-md text-[13px] text-emerald-light placeholder-emerald-light/25 focus:outline-none focus:border-emerald-mid/50 transition-colors disabled:opacity-50"
               />
-              <button type="submit" className="btn-primary flex items-center gap-2 whitespace-nowrap">
-                <Send size={13} /> Subscribe
+              <button
+                type="submit"
+                disabled={status === 'loading'}
+                className="btn-primary flex items-center gap-2 whitespace-nowrap disabled:opacity-50"
+              >
+                <Send size={13} />
+                {status === 'loading' ? 'Sending...' : 'Subscribe'}
               </button>
             </form>
           )}
