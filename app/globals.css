@@ -51,110 +51,110 @@
   }
 }
 
-/* ── Light mode overrides ─────────────────────────────────────── */
-html.light body,
-.light body {
-  background-color: #e8f0e9;
-  color: #0a1a0f;
-}
+/* ══════════════════════════════════════════
+   LIGHT MODE
+══════════════════════════════════════════ */
 
-/* Page background */
 html.light,
-.light {
-  background-color: #e8f0e9;
+html.light body {
+  background-color: #b7e892 !important;
+  color: #0a1a0f !important;
+  font-family: 'DM Sans', system-ui, sans-serif;
 }
 
-/* All generic text that would otherwise be white or near-white */
-.light .text-emerald-light,
-.light .text-emerald-light\/55,
-.light .text-emerald-light\/45,
-.light .text-emerald-light\/35,
-.light .text-emerald-light\/30,
-.light .text-emerald-light\/25,
-.light .text-emerald-light\/15,
-.light .text-emerald-light\/90 {
-  color: #1a3d1f !important;
+/* Navbar — match background, shadow top+bottom */
+html.light nav {
+  background-color: #b7e892 !important;
+  border-top: 1px solid rgba(0,0,0,0.07) !important;
+  border-bottom: 1px solid rgba(0,0,0,0.07) !important;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.04), 0 2px 8px rgba(0,0,0,0.06) !important;
+  backdrop-filter: none !important;
 }
-
-/* Section headings (white in dark → dark in light) */
-.light .section-heading,
-.light h1,
-.light h2,
-.light h3 {
+html.light nav a,
+html.light nav span,
+html.light nav button {
   color: #0a1a0f !important;
 }
-
-/* Section label (stays emerald, just darkened) */
-.light .section-label {
-  color: #2e7d32 !important;
+html.light nav a:hover {
+  color: #1b5e20 !important;
+}
+html.light nav [class*="border-emerald-mid"] {
+  border-color: rgba(0,0,0,0.2) !important;
+}
+/* Scrolled state */
+html.light .bg-forest-900\/95 {
+  background-color: #b7e892 !important;
 }
 
-/* Section sub text */
-.light .section-sub {
-  color: #2d4a30 !important;
-}
-
-/* Nav */
-.light nav {
-  background-color: #d6e8d7 !important;
-  border-color: #a5c8a8 !important;
-}
-.light nav a,
-.light nav span {
-  color: #0a1a0f !important;
-}
-.light nav a:hover {
-  color: #2e7d32 !important;
-}
-
-/* Ticker bar — keep dark green, just tweak text */
-.light .bg-forest-800 {
+/* Ticker — stays dark green */
+html.light .bg-forest-800 {
   background-color: #1b3a1f !important;
 }
 
-/* Cards */
-.light .card {
-  background-color: #ffffff !important;
-  border-color: #a5c8a8 !important;
-}
+/* All text */
+html.light .text-slate-50 { color: #0a1a0f !important; }
+html.light .text-emerald-DEFAULT { color: #1b5e20 !important; }
+html.light .text-emerald-mid { color: #2e7d32 !important; }
+html.light .text-emerald-light { color: #0a1a0f !important; }
+html.light [class*="text-emerald-light\/"] { color: #1a3d1f !important; }
+html.light .text-blue-400 { color: #1565c0 !important; }
+html.light .text-purple-400 { color: #6a1b9a !important; }
+html.light .text-amber-400 { color: #e65100 !important; }
+html.light .text-red-400 { color: #c62828 !important; }
 
-/* Inputs */
-.light input[type='email'] {
-  background-color: #ffffff !important;
-  border-color: #a5c8a8 !important;
-  color: #0a1a0f !important;
-}
-.light input[type='email']::placeholder {
-  color: #6b8f6e !important;
+/* Section typography */
+html.light .section-heading,
+html.light h1, html.light h2, html.light h3 { color: #0a1a0f !important; }
+html.light .section-label { color: #2e7d32 !important; }
+html.light .section-sub { color: #1a3d1f !important; }
+
+/* Cards */
+html.light .card {
+  background-color: rgba(255,255,255,0.5) !important;
+  border-color: rgba(0,0,0,0.1) !important;
 }
 
 /* Borders */
-.light .border-emerald-mid\/8,
-.light .border-emerald-mid\/10,
-.light .border-emerald-mid\/12,
-.light [class*='border-emerald-mid'] {
-  border-color: #a5c8a8 !important;
-}
+html.light [class*="border-emerald-mid"] { border-color: rgba(0,0,0,0.1) !important; }
+html.light [class*="border-blue-800"] { border-color: rgba(21,101,192,0.3) !important; }
+html.light [class*="border-purple-800"] { border-color: rgba(106,27,154,0.3) !important; }
+html.light [class*="border-amber-800"] { border-color: rgba(230,81,0,0.3) !important; }
+
+/* Team avatar backgrounds */
+html.light .bg-emerald-dark\/30 { background-color: rgba(46,125,50,0.15) !important; }
+html.light .bg-blue-900\/30 { background-color: rgba(21,101,192,0.1) !important; }
+html.light .bg-purple-900\/20 { background-color: rgba(106,27,154,0.08) !important; }
+html.light .bg-amber-900\/20 { background-color: rgba(230,81,0,0.08) !important; }
+
+/* Step numbers in HowToJoin */
+html.light .text-emerald-mid\/25 { color: rgba(46,125,50,0.4) !important; }
 
 /* Buttons */
-.light .btn-ghost {
+html.light .btn-primary {
+  background-color: #2e7d32 !important;
+  color: #ffffff !important;
+}
+html.light .btn-ghost {
   border-color: #2e7d32 !important;
   color: #2e7d32 !important;
 }
-.light .btn-ghost:hover {
-  background-color: #c8e6c9 !important;
+html.light .btn-ghost:hover { background-color: rgba(46,125,50,0.1) !important; }
+
+/* Inputs */
+html.light input[type='email'] {
+  background-color: rgba(255,255,255,0.65) !important;
+  border-color: rgba(0,0,0,0.15) !important;
+  color: #0a1a0f !important;
 }
+html.light input[type='email']::placeholder { color: #4a7a4e !important; }
 
 /* Footer */
-.light footer {
-  background-color: #d0e8d2 !important;
-  color: #1a3d1f !important;
+html.light footer {
+  background-color: #a8dc82 !important;
+  border-color: rgba(0,0,0,0.08) !important;
 }
-.light footer a {
-  color: #2e7d32 !important;
-}
+html.light footer * { color: #1a3d1f !important; }
 
-/* Scrolled navbar */
-.light .bg-forest-900\/95 {
-  background-color: rgba(214, 232, 215, 0.97) !important;
-}
+/* Pill / icon backgrounds */
+html.light .bg-emerald-mid\/10 { background-color: rgba(46,125,50,0.12) !important; }
+html.light .bg-white\/\[0\.04\] { background-color: rgba(255,255,255,0.6) !important; }

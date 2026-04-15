@@ -12,6 +12,12 @@ const members = [
     color: 'bg-blue-900/30 text-blue-400 border border-blue-800/30',
   },
   {
+    initials: 'AN',
+    name: 'Ani Naveen',
+    role: 'CTO',
+    color: 'bg-teal-900/30 text-teal-400 border border-teal-800/30',
+  },
+  {
     initials: '—',
     name: 'Open Position',
     role: 'Secretary',
@@ -35,7 +41,7 @@ export default function Team() {
         commitment to making it accessible for everyone.
       </p>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-5">
         {members.map((m) => (
           <div key={m.name + m.role} className="card p-6 text-center">
             <div
