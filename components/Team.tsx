@@ -14,20 +14,8 @@ const members = [
   {
     initials: 'AN',
     name: 'Ani Naveen',
-    role: 'CTO',
+    role: 'Chief Technology Officer',
     color: 'bg-teal-900/30 text-teal-400 border border-teal-800/30',
-  },
-  {
-    initials: '—',
-    name: 'Open Position',
-    role: 'Secretary',
-    color: 'bg-purple-900/20 text-purple-400 border border-purple-800/20',
-  },
-  {
-    initials: '—',
-    name: 'Open Position',
-    role: 'Treasurer',
-    color: 'bg-amber-900/20 text-amber-400 border border-amber-800/20',
   },
 ]
 

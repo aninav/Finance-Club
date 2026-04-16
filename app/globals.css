@@ -6,6 +6,46 @@
 @layer base {
   :root {
     --green-glow: rgba(76, 175, 80, 0.15);
+    --page-bg: #07130b;
+    --page-bg-secondary: #0d1f12;
+    --page-fg: #a5d6a7;
+    --heading: #f8fafc;
+    --muted: rgba(165, 214, 167, 0.55);
+    --subtle: rgba(165, 214, 167, 0.35);
+    --surface: rgba(255, 255, 255, 0.025);
+    --surface-strong: rgba(255, 255, 255, 0.04);
+    --surface-tint: rgba(76, 175, 80, 0.07);
+    --border: rgba(76, 175, 80, 0.12);
+    --border-strong: rgba(76, 175, 80, 0.2);
+    --accent-strong: #4caf50;
+    --accent-soft: rgba(76, 175, 80, 0.1);
+    --accent-contrast: #0a1a0f;
+    --nav-bg: rgba(7, 19, 11, 0.8);
+    --ticker-bg: #0d1f12;
+    --footer-bg: transparent;
+    --negative: #f87171;
+  }
+
+  html.light {
+    --green-glow: rgba(74, 124, 68, 0.16);
+    --page-bg: #f5f2e8;
+    --page-bg-secondary: #e5efda;
+    --page-fg: #203325;
+    --heading: #122018;
+    --muted: rgba(32, 51, 37, 0.68);
+    --subtle: rgba(32, 51, 37, 0.46);
+    --surface: rgba(255, 252, 245, 0.72);
+    --surface-strong: rgba(255, 255, 255, 0.88);
+    --surface-tint: rgba(86, 120, 73, 0.08);
+    --border: rgba(74, 101, 76, 0.16);
+    --border-strong: rgba(74, 101, 76, 0.26);
+    --accent-strong: #1f5830;
+    --accent-soft: rgba(47, 106, 59, 0.12);
+    --accent-contrast: #f8f6ef;
+    --nav-bg: rgba(245, 242, 232, 0.9);
+    --ticker-bg: linear-gradient(135deg, rgba(228, 239, 218, 0.96), rgba(243, 236, 220, 0.96));
+    --footer-bg: rgba(222, 234, 208, 0.72);
+    --negative: #b5483e;
   }
 
   html {
@@ -13,41 +53,60 @@
   }
 
   body {
-    @apply bg-forest-900 text-emerald-light antialiased;
+    background:
+      radial-gradient(circle at top left, var(--green-glow), transparent 26rem),
+      radial-gradient(circle at top right, rgba(255, 255, 255, 0.04), transparent 22rem),
+      linear-gradient(180deg, var(--page-bg) 0%, var(--page-bg-secondary) 100%);
+    color: var(--page-fg);
     font-family: 'DM Sans', system-ui, sans-serif;
+    @apply antialiased;
   }
 
   ::selection {
-    @apply bg-emerald-dark/30 text-emerald-light;
+    background-color: var(--accent-soft);
+    color: var(--heading);
   }
 }
 
 @layer components {
   .section-label {
-    @apply text-[11px] tracking-[0.12em] uppercase text-emerald-mid mb-3 font-medium;
+    color: var(--accent-strong);
+    @apply mb-3 text-[11px] font-medium uppercase tracking-[0.12em];
   }
 
   .section-heading {
     font-family: 'DM Serif Display', serif;
-    @apply text-4xl font-normal text-slate-50 mb-4;
+    color: var(--heading);
+    @apply mb-4 text-4xl font-normal;
   }
 
   .section-sub {
-    @apply text-[15px] text-emerald-light/55 leading-relaxed max-w-xl mb-10;
+    color: var(--muted);
+    @apply mb-10 max-w-xl text-[15px] leading-relaxed;
   }
 
   .card {
-    @apply bg-white/[0.025] border border-emerald-mid/[0.12] rounded-xl;
+    background-color: var(--surface);
+    border-color: var(--border);
+    box-shadow: 0 18px 40px rgba(7, 19, 11, 0.08);
+    @apply rounded-xl border;
   }
 
   .btn-primary {
-    @apply px-7 py-3 bg-emerald-mid text-forest-900 rounded-md text-sm font-medium
-           hover:brightness-110 transition-all duration-200;
+    background-color: var(--accent-strong);
+    color: var(--accent-contrast);
+    box-shadow: 0 12px 24px rgba(31, 88, 48, 0.18);
+    @apply rounded-md px-7 py-3 text-sm font-medium transition-all duration-200 hover:brightness-110;
   }
 
   .btn-ghost {
-    @apply px-7 py-3 border border-emerald-mid/35 text-emerald-mid rounded-md text-sm
-           hover:bg-emerald-mid/10 transition-colors duration-200;
+    border-color: var(--border-strong);
+    color: var(--accent-strong);
+    @apply rounded-md border px-7 py-3 text-sm transition-colors duration-200;
+  }
+
+  .btn-ghost:hover {
+    background-color: var(--accent-soft);
   }
 }
 
@@ -158,3 +217,175 @@ html.light footer * { color: #1a3d1f !important; }
 /* Pill / icon backgrounds */
 html.light .bg-emerald-mid\/10 { background-color: rgba(46,125,50,0.12) !important; }
 html.light .bg-white\/\[0\.04\] { background-color: rgba(255,255,255,0.6) !important; }
+
+html.light nav {
+  background-color: var(--nav-bg) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.28);
+  border-bottom: 1px solid var(--border) !important;
+  box-shadow: 0 14px 34px rgba(51, 72, 43, 0.08) !important;
+  backdrop-filter: blur(18px) !important;
+}
+
+html.light .bg-forest-900\/95 {
+  background-color: var(--nav-bg) !important;
+}
+
+html.light .bg-forest-800 {
+  background: var(--ticker-bg) !important;
+}
+
+html.light .card,
+html.light .bg-white\/\[0\.025\],
+html.light .bg-white\/\[0\.03\],
+html.light .bg-white\/\[0\.04\] {
+  background-color: var(--surface) !important;
+}
+
+html.light .bg-emerald-mid\/\[0\.07\] {
+  background-color: var(--surface-tint) !important;
+}
+
+html.light .bg-emerald-mid\/\[0\.12\],
+html.light .bg-emerald-mid\/10 {
+  background-color: var(--accent-soft) !important;
+}
+
+html.light .bg-emerald-dark {
+  background-color: #dbe6cd !important;
+}
+
+html.light .bg-emerald-dark\/30 {
+  background-color: rgba(47, 106, 59, 0.12) !important;
+}
+
+html.light .bg-blue-900\/30 {
+  background-color: rgba(49, 105, 180, 0.12) !important;
+}
+
+html.light .bg-purple-900\/20 {
+  background-color: rgba(126, 87, 194, 0.1) !important;
+}
+
+html.light .bg-amber-900\/20 {
+  background-color: rgba(194, 112, 44, 0.12) !important;
+}
+
+html.light .bg-teal-900\/30 {
+  background-color: rgba(46, 125, 116, 0.12) !important;
+}
+
+html.light .text-slate-50,
+html.light .text-emerald-light,
+html.light .section-heading,
+html.light h1,
+html.light h2,
+html.light h3 {
+  color: var(--heading) !important;
+}
+
+html.light .text-emerald-light\/90,
+html.light .text-emerald-light\/60,
+html.light .text-emerald-light\/55,
+html.light .text-emerald-light\/50,
+html.light .text-emerald-light\/45 {
+  color: var(--muted) !important;
+}
+
+html.light .text-emerald-light\/40,
+html.light .text-emerald-light\/35,
+html.light .text-emerald-light\/30,
+html.light .text-emerald-light\/25,
+html.light .text-emerald-light\/20,
+html.light .text-emerald-light\/15 {
+  color: var(--subtle) !important;
+}
+
+html.light .text-emerald-DEFAULT,
+html.light .text-emerald-mid,
+html.light .section-label {
+  color: var(--accent-strong) !important;
+}
+
+html.light .text-emerald-mid\/25 {
+  color: rgba(47, 106, 59, 0.35) !important;
+}
+
+html.light .text-blue-400 {
+  color: #3169b4 !important;
+}
+
+html.light .text-purple-400 {
+  color: #7e57c2 !important;
+}
+
+html.light .text-amber-400 {
+  color: #c2702c !important;
+}
+
+html.light .text-teal-400 {
+  color: #2e7d74 !important;
+}
+
+html.light .text-red-400 {
+  color: var(--negative) !important;
+}
+
+html.light [class*='border-emerald-mid'] {
+  border-color: var(--border) !important;
+}
+
+html.light .border-blue-800\/30 {
+  border-color: rgba(49, 105, 180, 0.24) !important;
+}
+
+html.light .border-purple-800\/30 {
+  border-color: rgba(126, 87, 194, 0.24) !important;
+}
+
+html.light .border-amber-800\/30 {
+  border-color: rgba(194, 112, 44, 0.24) !important;
+}
+
+html.light .border-teal-800\/30 {
+  border-color: rgba(46, 125, 116, 0.24) !important;
+}
+
+html.light .btn-primary {
+  background-color: var(--accent-strong) !important;
+  color: var(--accent-contrast) !important;
+}
+
+html.light .btn-ghost {
+  border-color: var(--border-strong) !important;
+  color: var(--accent-strong) !important;
+}
+
+html.light .btn-ghost:hover {
+  background-color: var(--accent-soft) !important;
+}
+
+html.light input[type='email'] {
+  background-color: var(--surface-strong) !important;
+  border-color: var(--border) !important;
+  color: var(--heading) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+html.light input[type='email']::placeholder {
+  color: rgba(47, 106, 59, 0.55) !important;
+}
+
+html.light footer {
+  background-color: var(--footer-bg) !important;
+  border-color: var(--border) !important;
+}
+
+html.light footer * {
+  color: var(--muted) !important;
+}
+
+html.light footer a:hover,
+html.light nav a:hover,
+html.light nav button:hover {
+  color: var(--accent-strong) !important;
+}
