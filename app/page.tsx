@@ -3,7 +3,6 @@ import About from '@/components/About'
 import Team from '@/components/Team'
 import HowToJoin from '@/components/HowToJoin'
 import Resources from '@/components/Resources'
-import InstagramFeed from '@/components/InstagramFeed'
 import Contact from '@/components/Contact'
 
 export default function Home() {
@@ -14,7 +13,6 @@ export default function Home() {
       <Team />
       <HowToJoin />
       <Resources />
-      <InstagramFeed />
       <Contact />
     </>
   )
