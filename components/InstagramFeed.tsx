@@ -21,9 +21,10 @@ export default function InstagramFeed() {
         </a>
       </p>
 
-      <div className="mb-8">
-        <behold-widget feed-id={BEHOLD_FEED_ID} />
-      </div>
+      <div
+        className="mb-8"
+        dangerouslySetInnerHTML={{ __html: `<behold-widget feed-id="${BEHOLD_FEED_ID}"></behold-widget>` }}
+      />
       <Script src="https://w.behold.so/widget.js" strategy="lazyOnload" />
 
       
