@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Mail, Instagram, Send } from 'lucide-react'
 
 // ── Update these to your real contact details ──
-const CONTACT_EMAIL = 'chsfinanceclub@gmail.com'   // ← change to your new email
+const CONTACT_EMAIL = 'fifowealthy@gmail.com'   // ← change to your new email
 const INSTAGRAM_HANDLE = '@chs_finance_club_'
 const INSTAGRAM_URL = 'https://www.instagram.com/chs_finance_club_'
 
