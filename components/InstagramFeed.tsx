@@ -11,7 +11,6 @@ import Script from 'next/script'
 // ─────────────────────────────────────────────────────────────
 const BEHOLD_FEED_ID = 'hHFDDbltvdTMpw9rKGu5'
 
-const IS_CONFIGURED = BEHOLD_FEED_ID !== 'YOUR_FEED_ID_HERE'
 
 export default function InstagramFeed() {
   return (
