@@ -22,7 +22,6 @@ export default function InstagramFeed() {
       </p>
 
       <div className="mb-8">
-        {/* @ts-ignore — behold-widget is a custom element */}
         <behold-widget feed-id={BEHOLD_FEED_ID} />
       </div>
       <Script src="https://w.behold.so/widget.js" strategy="lazyOnload" />
