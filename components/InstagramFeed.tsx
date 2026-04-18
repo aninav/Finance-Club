@@ -1,5 +1,4 @@
 'use client'
-import Script from 'next/script'
 import { Instagram } from 'lucide-react'
 
 const BEHOLD_FEED_ID = 'hHFDDbltvdTMpw9rKGu5'
@@ -11,7 +10,7 @@ export default function InstagramFeed() {
       <h2 className="section-heading">Follow along</h2>
       <p className="section-sub">
         Stay up to date with meeting recaps, finance insights, and club news{' '}
-        
+        <a
           href="https://www.instagram.com/chs_finance_club_"
           target="_blank"
           rel="noopener noreferrer"
@@ -23,11 +22,15 @@ export default function InstagramFeed() {
 
       <div
         className="mb-8"
-        dangerouslySetInnerHTML={{ __html: `<behold-widget feed-id="${BEHOLD_FEED_ID}"></behold-widget>` }}
+        dangerouslySetInnerHTML={{
+          __html: `
+            <script type="module" src="https://w.behold.so/widget.js"></script>
+            <behold-widget feed-id="${BEHOLD_FEED_ID}"></behold-widget>
+          `,
+        }}
       />
-      <Script src="https://w.behold.so/widget.js" strategy="beforeInteractive" />
 
-      
+      <a
         href="https://www.instagram.com/chs_finance_club_"
         target="_blank"
         rel="noopener noreferrer"
