@@ -11,7 +11,7 @@ export default function InstagramFeed() {
       <h2 className="section-heading">Follow along</h2>
       <p className="section-sub">
         Stay up to date with meeting recaps, finance insights, and club news{' '}
-        
+        <a
           href="https://www.instagram.com/chs_finance_club_"
           target="_blank"
           rel="noopener noreferrer"
@@ -27,7 +27,7 @@ export default function InstagramFeed() {
       />
       <Script src="https://w.behold.so/widget.js" strategy="lazyOnload" />
 
-      
+      <a
         href="https://www.instagram.com/chs_finance_club_"
         target="_blank"
         rel="noopener noreferrer"
