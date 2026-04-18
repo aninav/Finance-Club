@@ -9,7 +9,7 @@ import Script from 'next/script'
 // 3. Create a feed → copy the Feed ID
 // 4. Paste it into BEHOLD_FEED_ID below
 // ─────────────────────────────────────────────────────────────
-const BEHOLD_FEED_ID = 'YOUR_FEED_ID_HERE'
+const BEHOLD_FEED_ID = 'hHFDDbltvdTMpw9rKGu5'
 
 const IS_CONFIGURED = BEHOLD_FEED_ID !== 'YOUR_FEED_ID_HERE'
 
