@@ -2,7 +2,7 @@ const members = [
   {
     initials: 'SS',
     name: 'Shaurya Saxena',
-    role: 'Founder & VP',
+    role: 'Founder',
     color: 'bg-emerald-dark/30 text-emerald-DEFAULT border border-emerald-mid/25',
   },
   {
@@ -17,6 +17,12 @@ const members = [
     role: 'Chief Technology Officer',
     color: 'bg-teal-900/30 text-teal-400 border border-teal-800/30',
   },
+  {
+    initials: 'BK',
+    name: 'Bhargav Kidambi',
+    role: 'Vice President',
+    color: 'bg-purple-900/30 text-purple-400 border border-purple-800/30',
+  }
 ]
 
 export default function Team() {
