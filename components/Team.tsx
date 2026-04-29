@@ -1,20 +1,14 @@
 const members = [
   {
-    initials: 'SS',
-    name: 'Shaurya Saxena',
-    role: 'Founder',
-    color: 'bg-emerald-dark/30 text-emerald-DEFAULT border border-emerald-mid/25',
-  },
-  {
     initials: 'SC',
     name: 'Shourya Chawla',
-    role: 'Co-Founder & President',
+    role: 'Founder & President',
     color: 'bg-blue-900/30 text-blue-400 border border-blue-800/30',
   },
   {
     initials: 'AN',
     name: 'Ani Naveen',
-    role: 'Chief Technology Officer',
+    role: 'Co-Founder & Chief Technology Officer',
     color: 'bg-teal-900/30 text-teal-400 border border-teal-800/30',
   },
   {
